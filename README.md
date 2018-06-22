@@ -14,22 +14,22 @@ I hate spinning up an expensive Win10 VM every time I need to do homework for th
 
 Now you can use native tools to write assembly code (your favorite text editor, IDE, whatever) and build native executables that can be passed to a native debuger (gdb, lldb). Graphical debugging is possible with a gdb wrapper such as `kdbg` or by using vscode's [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb) extension,  more info in `Instructions :: Optional ...`
 
-# Instructions
+# Building
 
 ### *Note: In order to avoid platform compatability issues, the masm-unix repo does not include precompiled binaries, you **must** build them yourself. Don't worry, it's easy.*
 
 ## Prerequesites
 
-Debian-based (Ubuntu, Debian, Linux Mint, ...)
+### Debian-based (Ubuntu, Debian, Linux Mint, ...)
 ```
 sudo apt install build-essential cmake nasm perl
 ```
-OSX (not tested)
+### OSX (not tested)
 
 Install xcode and [homebrew](https://brew.sh/), then:
 ```
 xcode-select --install          # installs command line tools
-brew install cmake nasm perl    # installs cmake, nasm and perl
+brew install cmake nasm perl
 ```
 
 ### Building JWasm and Along32
@@ -48,13 +48,13 @@ brew install cmake nasm perl    # installs cmake, nasm and perl
 
 That's it! Now you can build masm into native binaries!
 
-### Building and running masm files
+# Usage
 
 From the root directory, run `make bin/{your_filename}` to build an excutable 
-- Example: `make bin/ch7-1` will look for a source file called `ch7-1.asm` 
-and create an executable called `ch7-1` located in the `bin` folder
+- Example: `make bin/ch7-1` will look for a source file called `ch7-1.asm` in the current directory, and create an executable called `ch7-1` located in the `bin` folder
 
-Run your file using `./ 
+Run your file using `./bin/{filename}`
+- Example: `./bin/ch7-2`
 
 ### Optional: vscode build and debug support
 ```
@@ -71,6 +71,6 @@ Install using `ext install bltg-team.masm`
     - Build current file using ctrl+shift+b
     - Run current file using f5
 
-## Known Issues (stolen from MASM_OSX)
+# Known Issues (stolen from MASM_OSX)
 
 * Can't have the first value in `.data` be uninitialized. See [here](https://github.com/janka102/MASM_OSX#known-issues) for more info
