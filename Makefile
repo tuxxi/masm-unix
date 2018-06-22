@@ -4,43 +4,45 @@ BDIR=bin
 SRCS=$(wildcard *.asm)
 BINS=$(addprefix $(BDIR)/,$(SRCS:.asm=))
 
-CC = 
-CFLAGS = 
 JW_FLAGS = -nologo -zt0 -elf -Fo
+
 
 UNAME_S := $(shell uname -s)
 
-ifeq ($(UNAME_S),Linux)
-	CC=g++
-	CFLAGS=-Wall -O0 -g -m32 -march=i386 -lAlong32 -Llib -no-pie
+ifeq ($(UNAME_S), Linux)
+CC=g++
+CFLAGS = -g -m32 -march=i386 -lAlong32 -Llib
 endif
-ifeq ($(UNAME_S),Darwin)
-	CC=clang
-	CFLAGS=-Wall -O0 -g -arch i386 -lAlong32 -Llib -Wl,-no_pie
+ifeq ($(UNAME_S), Darwin)
+CC=clang
+CFLAGS = -O0 -g -arch i386 -lAlong32 -Llib -Wl,-no_pie
 endif
 
 
 all: $(BINS)
 
 # final steps: OS dependant
+# on Linux, just link the elf into an executable that we can run
+# $(BDIR)/%: $(BDIR)/%.o
+# 	$(CC) $< -o $@ $(CFLAGS)
 
 ifeq ($(UNAME_S),Linux)
-	# on Linux, just link the elf into an executable that we can run
-	$(BDIR)/%: $(BDIR)/%.o
-		$(CC) $< -o $@ $(CFLAGS)
+# on Linux, just link the elf into an executable that we can run
+$(BDIR)/%: $(BDIR)/%.o
+	$(CC) $< -o $@ $(CFLAGS)
 endif
 
 ifeq ($(UNAME_S),Darwin)
-	# on OSX, we convert the elf from jwasm into a Mach-O using objconv
-	# because jwasm doesn't support mach-o
+# on OSX, we convert the elf from jwasm into a Mach-O using objconv
+# because jwasm doesn't support mach-o
 
-	# link into executable using (clang by default)
-	$(BDIR)/%: $(BDIR)/%.macho
-		$(CC) $< -o $@ $(CFLAGS)
+# link into executable using (clang by default)
+$(BDIR)/%: $(BDIR)/%.macho
+	$(CC) $< -o $@ $(CFLAGS)
 
-	# use objconv to convert elf to 32-bit Mach-O
-	$(BDIR)/%.macho: $(BDIR)/%.o
-		$(LDIR)/objconv -fmac32 -nu $< $@
+# use objconv to convert elf to 32-bit Mach-O
+$(BDIR)/%.macho: $(BDIR)/%.o
+	$(LDIR)/objconv -fmac32 -nu $< $@
 endif
 
 # Next step: use jwasm to turn masm into elf binary
