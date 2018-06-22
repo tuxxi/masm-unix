@@ -1,0 +1,11 @@
+=====================================================
+Changes between 1.0.2 and 1.0.3
+  fix the bug in ReadHex.
+
+=====================================================
+Changes between 1.0.1 and 1.0.2
+  fix the bug in ReadInt and found a bug in ReadHex.
+
+=====================================================
+Changes between 1.0 and 1.0.1
+  rewrite some confusing instructions in the README file.

@@ -1,0 +1,14 @@
+# cmake build contents
+build/
+# built files
+bin/
+
+# libraries and build products
+jwasm
+libAlong32.a
+objconv
+
+*.o
+
+*.asm
+*.err

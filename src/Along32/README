@@ -1,0 +1,53 @@
+Along32: http://along32.sourceforge.net
+This is the installing and usage introduction about Along32 library.
+Lib Along32 is a function library of linux nasm, which is mainly moified from Irvine32 lib, the auxiliary library in "Assembly Language for Intel-based Computers", written by Kip R. Irvine.
+Along32 lib is written by Curtis Wong, for the purpose of using the Irvine32 lib under Linux and learning the Intel-based assembly language.
+
+This library can be used under Linux(x86) or other POSIX-compliant OS, but it has been only tested under Linux.
+For the differences of design patterns between Linux and Windows, not all functions and macros in Irvine32 have been rewritten, but the core part of it.
+Before you begin programing with Along32 lib, PLEASE read the comments in the Along32.inc to ensure the functions you want included in the library.
+
+1. Install the library
+It is very easy to install the Along32 lib. Completely installing can be chieved by only a few steps.
+   a. cd src
+      Change the current directory to src.
+   b. make
+      Build the library.
+   c. make install
+      Install the library to your Linux. The default location is /usr/lib.
+      Normally, you should make sure that you own enough power to
+      install the library to the location. Sudo it is the best solution.
+   d. All is done!
+
+2. How to use
+After you install the library, you can use the functions and macros in it easily.
+   a. Include the Along32.inc in your .asm source file.
+      This step is the key to use the functions. Do not forget.
+   b. Scan Along32.inc to find out the functions you want.
+      And the usage of certain function is contained in src/Along32.asm,
+      or you can read it in "Assembly Language for Intel-Based Computers,
+      5th edition" in great details.
+   c. Finish your assembly programing.
+   d. Assembly your source file with NASM.
+      Before assembling, make sure your nasm is correctly installed.
+      Then type the following command:
+      nasm -f elf -o objfile srcfile
+      where objfile is the name of the object file normally suffixed by
+      .o, and srcfile is your assembly source file.
+   e. Link your object file into binary program with Along32 library.
+      Type the following command:
+      ld -lAlong32 --dynamic-linker /lib/ld-linux.so.2 -o binfile objfile
+      where binfile is the name of your final program, and objfile is the
+      object file produced by last step.
+   f. Enjoy your program and Along32 library.
+
+===============================================================
+Additionally, some macros have been created to simulate the psudo-instructions in MASM.
+If you want to use these features, please read the comments in Macros_Along.inc for more information. To use these macros, just include the file and then build your program according to the above instructions.
+
+For more information or bug reports, please send me an email: 
+airekans@gmail.com
+
+*** LEGAL ***
+
+Along32 library is placed under GNU LGPL. For more details, see the files COPYING and COPYING.LESSER.

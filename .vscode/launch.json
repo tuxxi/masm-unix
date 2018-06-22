@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "MASM Launch with lldb",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceRoot}/bin/${fileBasenameNoExtension}",
+      "args": ["--stop-at-entry"],
+      "cwd": "${workspaceRoot}",
+      "internalConsoleOptions": "openOnSessionStart"
+    }
+  ]
+}
