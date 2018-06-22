@@ -24,15 +24,18 @@
 # Assembler is NASM
 ASM = nasm
 
-# Format of object file is linux
-LINUX_FORMAT = elf32
+# Format of object file depends on platform
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S), Linux)
+FILE_FORMAT = elf32
+endif
+ifeq ($(UNAME_S), Darwin)
+FILE_FORMAT = macho32
+endif
 
 # Flags used in assemblying phase
 ASMFLAGS =
-
-# Where to install. Default is /usr/lib
-INSTDIR = /usr/lib
-
 # Linker is ld
 LINKER = ld
 
@@ -54,22 +57,3 @@ Along32.o: Along32.asm
 
 clean:
 	-rm Along32.o libAlong32.so
-
-install: libAlong32.so
-	@if [ -d $(INSTDIR) ]; \
-	    then \
-	    cp libAlong32.so $(INSTDIR);\
-	    chmod a+x $(INSTDIR)/libAlong32.so;\
-	    echo "Installed in $(INSTDIR)";\
-	 else \
-	    echo "Sorry, $(INSTDIR) does not exist";\
-	 fi
-
-uninstall:
-	@if [ -d $(INSTDIR) ]; \
-	    then \
-	    rm $(INSTDIR)/libAlong32.so;\
-	    echo "Uninstalling finished";\
-	 else \
-	    echo "Sorry, $(INSTDIR) does not exist";\
-	 fi

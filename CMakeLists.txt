@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(masm_unix)
 
+# the binares built in this process go here
 set(OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
 set(SOURCES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
@@ -21,9 +22,9 @@ set_target_properties(objconv PROPERTIES
 set_target_properties(jwasm PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 
-# include Along32's makefile and build by default
+# include Along32's makefile 
 add_custom_target(
-   Along32 ALL
+   Along32 ALL      # the ALL option builds by default when running cmake --build
    COMMAND make
    WORKING_DIRECTORY ${ALONG32_DIR}/src
 )

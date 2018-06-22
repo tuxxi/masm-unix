@@ -11,7 +11,7 @@ UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S), Linux)
 CC=g++
-CFLAGS = -g -m32 -march=i386 -lAlong32 -Llib
+CFLAGS = -O0 -g -m32 -march=i386 -lAlong32 -Llib -no-pie
 endif
 ifeq ($(UNAME_S), Darwin)
 CC=clang
