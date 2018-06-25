@@ -22,7 +22,7 @@
 #
 
 # Assembler is NASM
-ASM = nasm
+ASM = yasm
 
 # Format of object file depends on platform
 UNAME_S := $(shell uname -s)
