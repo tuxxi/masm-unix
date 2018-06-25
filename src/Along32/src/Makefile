@@ -53,7 +53,7 @@ libAlong32.a: Along32.o
 # 	$(LINKER) -m elf_i386 $(SHLIB) Along32.o -o libAlong32.so -lc
 
 Along32.o: Along32.asm 
-	$(ASM) -f $(LINUX_FORMAT) $(ASMFLAGS) -o Along32.o Along32.asm
+	$(ASM) -f $(FILE_FORMAT) $(ASMFLAGS) -o Along32.o Along32.asm
 
 clean:
 	-rm Along32.o libAlong32.so

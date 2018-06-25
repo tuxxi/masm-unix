@@ -8,7 +8,10 @@ jwasm
 libAlong32.a
 objconv
 
+
 *.o
 
 *.asm
+!src/Along32/src/Along32.asm
+
 *.err
