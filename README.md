@@ -19,17 +19,20 @@ Now you can use native tools to write assembly code (your favorite text editor, 
 ### *Note: In order to avoid platform compatability issues, the masm-unix repo does not include precompiled binaries, you **must** build them yourself. Don't worry, it's easy.*
 
 ## Prerequesites
-
+Requires `yasm`, `perl` and `cmake`
 ### Debian-based (Ubuntu, Debian, Linux Mint, ...)
 ```
-sudo apt install build-essential cmake nasm perl
+sudo apt install build-essential cmake yasm perl
 ```
 ### OSX (not tested)
 
-Install xcode and [homebrew](https://brew.sh/), then:
+Install xcode, then
 ```
 xcode-select --install          # installs command line tools
-brew install cmake nasm perl
+```
+Then install homebrew [homebrew](https://brew.sh/), then:
+```
+brew install cmake yasm perl
 ```
 
 ### Building JWasm and Along32

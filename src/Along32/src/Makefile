@@ -21,7 +21,7 @@
 #
 #
 
-# Assembler is NASM
+# Assembler is YASM
 ASM = yasm
 
 # Format of object file depends on platform

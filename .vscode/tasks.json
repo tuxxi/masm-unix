@@ -12,7 +12,7 @@
     {
       "taskName": "build current file",
       "isBuildCommand": true,
-      "args": ["bin/${fileBasenameNoExtension}"]
+      "args": ["${fileBasenameNoExtension}"]
     },
     {
       "taskName": "all",
