@@ -13,5 +13,5 @@ objconv
 
 *.asm
 !src/Along32/src/Along32.asm
-
+!template.asm
 *.err
