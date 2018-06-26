@@ -7,10 +7,10 @@ CFLAGS = -O0 -g -m32 -march=i386 -lAlong32 -Llib -no-pie
 endif
 ifeq ($(UNAME_S), Darwin)
 CC=clang
-CFLAGS = -O0 -g -arch i386 -lAlong32 -Llib -Wl,-no_pie
+CFLAGS=-Wall -O0 -g -arch i386 -lAlong32 -Llib -Wl,-no_pie
 endif
 
-JW_FLAGS = -nologo -zt0 -elf -Fo
+JWFLAGS = -nologo -zt0 -elf -Fo
 
 LDIR=lib
 BDIR=bin
@@ -20,9 +20,6 @@ all: $(addprefix ,$(SRCS:.asm=))
 
 
 # final steps: OS dependant
-# on Linux, just link the elf into an executable that we can run
-# %: %.o
-# 	$(CC) $< -o $@ $(CFLAGS)
 
 ifeq ($(UNAME_S),Linux)
 # on Linux, just link the elf into an executable that we can run
@@ -36,21 +33,24 @@ ifeq ($(UNAME_S),Darwin)
 # on OSX, we convert the elf from jwasm into a Mach-O using objconv
 # because jwasm doesn't support mach-o
 
-# link into executable using (clang by default)
+# link into executable
 %: %.macho
 	$(CC) $< -o $@ $(CFLAGS)
+	cp $@ bin/$@	# move into bin
+	rm $@
 
 # use objconv to convert elf to 32-bit Mach-O
 %.macho: %.o
 	$(LDIR)/objconv -fmac32 -nu $< $@
+
 endif
 
 # Next step: use jwasm to turn masm into elf binary
-%.o: %.proc
-	$(LDIR)/jwasm $(JW_FLAGS) $@ $<
+%.o: %.asm.p
+	$(LDIR)/jwasm $(JWFLAGS) $@ $<
 
 # First step: use perl -e to replace "Include Irvine32.inc" with "Include lib/Along32.inc"
-%.proc: %.asm
+%.asm.p: %.asm
 	mkdir -p $(BDIR)
 	cp $< $@
 	perl -pi -e 's,Include Irvine32.inc,Include lib/Along32.inc,i' $@

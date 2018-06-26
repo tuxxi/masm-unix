@@ -95,9 +95,9 @@ WriteHexB PROTO
 WriteInt PROTO
 WriteString PROTO
 
-;-----------------------------------
-; Standard 4-bit color definitions
-;-----------------------------------
+;-------------------------------------------
+; Standard (ms-dos) 4-bit color definitions
+;-------------------------------------------
 black        = 0000b
 blue         = 0001b
 green        = 0010b

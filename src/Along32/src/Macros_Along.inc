@@ -7,7 +7,7 @@
 ; This file is part of Along32 library.
 ;
 ; Along32 library is free software: you can redistribute it and/or modify
-; it under the terms of the GNU Lesser General Public License as 
+; it under the terms of the GNU Lesser General Public License as
 ; published by the Free Software Foundation, either version 3 of the
 ; License, or(at your option) any later version.
 ;
@@ -23,11 +23,11 @@
 ; Macro definitions for Along32 library
 ; This is just a auxiliary file for Along32.asm, which means
 ; that it cannot be used solely.
-; If you want to utilize the macros in this file, just include 
+; If you want to utilize the macros in this file, just include
 ; Along32.inc.
 ; Last Update: 2009.08.20
 ;
-     
+
 %ifndef MACRO_ALONG
 %define MACRO_ALONG
 
@@ -40,31 +40,31 @@
 
 ; define the timespec structure used in nanosleep
 struc timespec
-     tv_sec: resd 1
-     tv_nsec: resd 1
+	tv_sec: resd 1
+	tv_nsec: resd 1
 endstruc
 
 ; Synonym for MASM .exit
 %ifnmacro Exit
 %macro Exit 1.nolist
-     mov ebx, %1
-     mov eax, 1
-     int 80h
+	mov ebx, %1
+	mov eax, 1
+	int 80h
 %endmacro
 %endif
 
 ; Synonym for MASM invoke
 %ifnmacro INVOKE
 %macro INVOKE 1-*.nolist
-     %rep %0 - 1
-     %rotate -1
-     push dword %1
-     %endrep
-     
-     %rotate -1
-     call %1
-     
-     add esp, ( %0 - 1 ) * 4
+	%rep %0 - 1
+	%rotate -1
+	push dword %1
+	%endrep
+
+	%rotate -1
+	call %1
+
+	add esp, (%0 - 1) * 4
 %endmacro
 %endif
 
@@ -73,16 +73,16 @@ endstruc
 %macro mWrite 1.nolist
 ;
 ; Writes a string literal to standard output.
-; Receives: a string enclosed in single or double 
+; Receives: a string enclosed in single or double
 ;   quotes (null terminator not required).
 ;------------------------------------------------------
 segment .data
 	%%string: db %1, 0
 segment .text
-	push	edx
-	mov	edx,%%string
- 	call	WriteString
- 	pop	edx
+	push edx
+	mov  edx, %%string
+	call WriteString
+	pop  edx
 %endmacro
 %endif
 
@@ -96,12 +96,12 @@ segment .text
 ;------------------------------------------------------
 segment .data
 %%spaces: times %1 db ' '
-	    db 0
+	  db 0
 segment .text
-	push	edx
-	mov	edx, %%spaces
-	call	WriteString
-	pop	edx
+	push edx
+	mov  edx, %%spaces
+	call WriteString
+	pop  edx
 %endmacro
 %endif
 
@@ -113,21 +113,21 @@ segment .text
 ; Receives: the register name, the register value.
 ;---------------------------------------------------
 segment .data
-%%tempStr: db "  ", %1,"=",0
+%%tempStr: db "  ", %1, "=", 0
 
 segment .text
 	push eax
 
 ; Display the register name
-	push	edx
-	mov	edx, %%tempStr
-	call	WriteString
-	pop	edx
+	push edx
+	mov  edx, %%tempStr
+	call WriteString
+	pop  edx
 
 ; Display the register contents
-	mov	eax, %2
-	call	WriteHex
-	pop	eax
+	mov  eax, %2
+	call WriteHex
+	pop  eax
 %endmacro
 %endif
 

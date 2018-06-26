@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(masm_unix)
 
+
 # the binares built in this process go here
 set(OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
