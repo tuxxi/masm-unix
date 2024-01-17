@@ -5,7 +5,7 @@
 ; Homepage: http://along32.sourceforge.net
 ;
 ; Along32 library is free software: you can redistribute it and/or modify
-; it under the terms of the GNU Lesser General Public License as
+; it under the terms of the GNU Lesser General Public License as 
 ; published by the Free Software Foundation, either version 3 of the
 ; License, or(at your option) any later version.
 ;
@@ -17,15 +17,13 @@
 ; You should have received a copy of the GNU Lesser General Public License
 ; along with Along32 library.  If not, see <http://www.gnu.org/licenses/>.
 ;
-; Last update: 2015/10/20
+; Last update: 2009/08/20
 
-.NOLIST
-.386
-.model flat, stdcall
-.stack 4096
+%ifndef ALONG32
+%define ALONG32
 
 ; ------------------------------------------
-; function descriptions
+; function descriptions 
 ; ------------------------------------------
 ; Clrscr : Writes a carriage return / linefeed
 ; Crlf : output a new line
@@ -34,7 +32,7 @@
 ; IsDigit : Determines whether the character in AL is a valid decimal digit.
 ; DumpMem : Writes a range of memory to standard output in hexadecimal.
 ; ParseDecimal32: convert the number string to a decimal number
-; ParseInteger32 : Converts a string containing a signed decimal integer to binary.
+; ParseInteger32 : Converts a string containing a signed decimal integer to binary. 
 ; Str_length : compute the length of null-teminated string
 ; Str_compare : Compare two strings.
 ; Str_trim : Remove all occurences of a given character from the end of a string.
@@ -49,7 +47,6 @@
 ; ReadInt : Reads a 32-bit signed decimal integer from standard input
 ; ReadString : read string from input buffer
 ; ReadChar : read a character from stdin
-; SetTextColor : set console text color
 ; WriteBin : write a 32-bit binary number to console( interface )
 ; WriteBinB : write a 32-bit binary number to console
 ; WriteChar : write a character to stdout
@@ -62,65 +59,37 @@
 ; ------------------------------------------
 ; function prototypes
 ; ------------------------------------------
-Clrscr PROTO
-Crlf PROTO
-Delay PROTO
-DumpMem PROTO
-DumpRegs PROTO
-Gotoxy PROTO
-IsDigit PROTO
-ParseDecimal32 PROTO
-ParseInteger32 PROTO
-Random32 PROTO
-Randomize PROTO
-RandomRange PROTO
-ReadChar PROTO
-ReadDec PROTO
-ReadHex PROTO
-ReadInt PROTO
-ReadKey PROTO
-ReadString PROTO
-SetTextColor PROTO
-Str_compare PROTO
-Str_copy PROTO
-Str_length PROTO
-Str_trim PROTO
-Str_ucase PROTO
-WriteBin PROTO
-WriteBinB PROTO
-WriteChar PROTO
-WriteDec PROTO
-WriteHex PROTO
-WriteHexB PROTO
-WriteInt PROTO
-WriteString PROTO
-
-;-------------------------------------------
-; Standard (ms-dos) 4-bit color definitions
-;-------------------------------------------
-black        = 0000b
-blue         = 0001b
-green        = 0010b
-cyan         = 0011b
-red          = 0100b
-magenta      = 0101b
-brown        = 0110b
-lightGray    = 0111b
-gray         = 1000b
-lightBlue    = 1001b
-lightGreen   = 1010b
-lightCyan    = 1011b
-lightRed     = 1100b
-lightMagenta = 1101b
-yellow       = 1110b
-white        = 1111b
-
+extern Clrscr
+extern Crlf
+extern Delay
+extern DumpMem
+extern DumpRegs
+extern Gotoxy
+extern IsDigit
+extern ParseDecimal32
+extern ParseInteger32
+extern Random32
+extern Randomize
+extern RandomRange
+extern ReadChar
+extern ReadDec
+extern ReadHex
+extern ReadInt
+extern ReadKey
+extern ReadString
+extern Str_compare
+extern Str_copy
+extern Str_length
+extern Str_trim
+extern Str_ucase
+extern WriteBin
+extern WriteBinB
+extern WriteChar
+extern WriteDec
+extern WriteHex
+extern WriteHexB
+extern WriteInt
+extern WriteString
 ; ------------------------------------------
-; MACROS
-; ------------------------------------------
-EXIT macro code
-	mov eax, 0
-	ret
-endm
 
-.LIST
+%endif

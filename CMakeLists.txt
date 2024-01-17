@@ -32,5 +32,5 @@ add_custom_target(
 # copy libAlong32.a to the output dir
 add_custom_command(TARGET Along32 POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
-    ${ALONG32_DIR}/src/libAlong32.a ${OUTPUT_DIR}/libAlong32.a
+    ${ALONG32_DIR}/src/libAlong32.so ${OUTPUT_DIR}/libAlong32.so
 )
