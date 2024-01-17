@@ -2,10 +2,14 @@
 
 Write MASM code (and link to Irvine32) using native tools, assemble it into native ELF or Mach-O binaries. Graphical debugging is possible using your favorite gdb/lldb wrapper, however instructions for vscode are included.
 
-This is a fork of https://github.com/janka102/MASM_OSX that also supports Linux.
+This is a fork of a fork of https://github.com/janka102/MASM_OSX that also supports Linux.
+
+I created this fork because, like the original author, I needed to use Irvine32 and MASM for a university course. The professor told me I couldn't use Linux and had to buy a Windows PC or install Windows. I proved him wrong! The original forks build was broken on my computer and I'm sure a lot of other peoples too. This fork uses nasm instead of yasm.
 
 Made possible thanks to [JWasm](https://github.com/JWasm/JWasm). Irvine32 library via [Along32](https://github.com/janka102/Along32).
 OSX support thanks to [objconv](https://github.com/gitGNU/objconv)
+
+I am wholly unaware if OSX is actually supported but in theory it should. You might have to do some tinkering to get it to actually build. Apple silicon M series macs are probably not going to work because of the underlying architecture changes. I'm not too sure.
 
 
 # Background
@@ -19,7 +23,7 @@ Now you can use native tools to write assembly code (your favorite text editor, 
 
 
 ## Prerequesites
-Requires `yasm`, `perl` and `cmake`
+Requires `nasm`, `perl` and `cmake`
 ### Debian-based (Ubuntu, Debian, Linux Mint, ...)
 ```
 sudo apt install build-essential cmake yasm perl
@@ -46,8 +50,11 @@ brew install cmake yasm perl
     ```
     cd masm_unix
     mkdir build             # make a directory for build products
-    cmake -H. -Bbuild       # tell cmake to init in our build directory
-    cmake --build build     # tell cmake to build everything
+    cd build                # enter build directory
+    cmake ../               # create cmake files
+    cmake --build ./        # tell cmake to build everything
+    cd ../src/Along32/src   # enter Along32 source directory
+    sudo make install       # install shared libraries
     ```
 
 That's it! Now you can build masm into native binaries!
