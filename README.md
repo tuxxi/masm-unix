@@ -21,7 +21,7 @@ Now you can use native tools to write assembly code (your favorite text editor, 
 Requires `nasm`, `perl` and `cmake`
 ### Debian-based (Ubuntu, Debian, Linux Mint, ...)
 ```
-sudo apt install build-essential cmake yasm perl
+sudo apt install build-essential cmake nasm perl
 ```
 ### OSX (not tested)
 
@@ -32,7 +32,7 @@ xcode-select --install          # installs command line tools
 Then install homebrew [homebrew](https://brew.sh/), and: 
 
 ```
-brew install cmake yasm perl
+brew install cmake nasm perl
 ```
 
 ## Building JWasm, Along32, and objconv
