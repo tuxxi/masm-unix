@@ -2,7 +2,7 @@
 
 Write MASM code (and link to Irvine32) using native tools, assemble it into native ELF or Mach-O binaries. Graphical debugging is possible using your favorite gdb/lldb wrapper, however instructions for vscode are included.
 
-This is a fork of a fork of https://github.com/janka102/MASM_OSX that also supports Linux.
+This is a fork of https://github.com/janka102/MASM_OSX that also supports Linux.
 
 Made possible thanks to [JWasm](https://github.com/JWasm/JWasm). Irvine32 library via [Along32](https://github.com/janka102/Along32).
 OSX support thanks to [objconv](https://github.com/gitGNU/objconv)
