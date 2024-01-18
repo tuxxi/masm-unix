@@ -7,7 +7,6 @@ This is a fork of https://github.com/janka102/MASM_OSX that also supports Linux.
 Made possible thanks to [JWasm](https://github.com/JWasm/JWasm). Irvine32 library via [Along32](https://github.com/janka102/Along32).
 OSX support thanks to [objconv](https://github.com/gitGNU/objconv)
 
-
 # Background
 If you're like me, you had to take a x86 assembly class in college that uses Kip Irvine's book [Assembly Language for x86 Processors, 7th edition](http://kipirvine.com/asm/). The book uses MASM (Microsoft Macro Assembler) which is irrevocably tied to the Visual Studio toolchain on Windows. 
 
@@ -19,10 +18,10 @@ Now you can use native tools to write assembly code (your favorite text editor, 
 
 
 ## Prerequesites
-Requires `yasm`, `perl` and `cmake`
+Requires `nasm`, `perl` and `cmake`
 ### Debian-based (Ubuntu, Debian, Linux Mint, ...)
 ```
-sudo apt install build-essential cmake yasm perl
+sudo apt install build-essential cmake nasm perl
 ```
 ### OSX (not tested)
 
@@ -33,7 +32,7 @@ xcode-select --install          # installs command line tools
 Then install homebrew [homebrew](https://brew.sh/), and: 
 
 ```
-brew install cmake yasm perl
+brew install cmake nasm perl
 ```
 
 ## Building JWasm, Along32, and objconv
@@ -46,8 +45,11 @@ brew install cmake yasm perl
     ```
     cd masm_unix
     mkdir build             # make a directory for build products
-    cmake -H. -Bbuild       # tell cmake to init in our build directory
-    cmake --build build     # tell cmake to build everything
+    cd build                # enter build directory
+    cmake ../               # create cmake files
+    cmake --build ./        # tell cmake to build everything
+    cd ../src/Along32/src   # enter Along32 source directory
+    sudo make install       # install shared libraries
     ```
 
 That's it! Now you can build masm into native binaries!

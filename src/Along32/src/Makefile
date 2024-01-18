@@ -1,3 +1,6 @@
+# This makefile is to build the Along32 library and to install to the
+# correct location for the sake of dynamic linking.
+#
 # Copyright (C) 2009 Curtis Wong.
 # All right reserved.
 # Email: airekans@gmail.com
@@ -18,37 +21,50 @@
 #
 #
 
-# Assembler is YASM
-ASM = yasm
+# Assembler is NASM
+ASM = nasm
 
-# Format of object file depends on platform
-UNAME_S := $(shell uname -s)
+# Format of object file is linux
+LINUX_FORMAT = elf
 
-ifeq ($(UNAME_S), Linux)
-OBJECT_FORMAT = elf32
-endif
-ifeq ($(UNAME_S), Darwin)
-OBJECT_FORMAT = macho
-endif
+# Flags used in assemblying phase
+ASMFLAGS =
 
-# let gcc run ld for us..
-CC = gcc
+# Where to install. Default is /usr/lib
+INSTDIR = /usr/lib
 
-CFLAGS = -m32 -read_only_relocs suppress
+# Linker is ld
+LINKER = ld
 
-ASMFLAGS = --prefix _
+# Share libbrary option for linker
+SHLIB = -shared
 
-all: libAlong32.a
-
-libAlong32.a: Along32.o
-	ar rcs libAlong32.a Along32.o
+all: libAlong32.so
 
 libAlong32.so: Along32.o
-	$(CC) $(CFLAGS) Along32.o -o libAlong32.so -lc
+	$(LINKER) -m elf_i386 $(SHLIB) Along32.o -o libAlong32.so -lc
 
 Along32.o: Along32.asm 
-	$(ASM) -f $(OBJECT_FORMAT) $(ASMFLAGS) -o Along32.o Along32.asm
+	$(ASM) -f $(LINUX_FORMAT) $(ASMFLAGS) -o Along32.o Along32.asm
 
 clean:
-	-rm -f Along32.o libAlong32.so libAlong32.a
+	-rm Along32.o libAlong32.so
 
+install: libAlong32.so
+	@if [ -d $(INSTDIR) ]; \
+	    then \
+	    cp libAlong32.so $(INSTDIR);\
+	    chmod a+x $(INSTDIR)/libAlong32.so;\
+	    echo "Installed in $(INSTDIR)";\
+	 else \
+	    echo "Sorry, $(INSTDIR) does not exist";\
+	 fi
+
+uninstall:
+	@if [ -d $(INSTDIR) ]; \
+	    then \
+	    rm $(INSTDIR)/libAlong32.so;\
+	    echo "Uninstalling finished";\
+	 else \
+	    echo "Sorry, $(INSTDIR) does not exist";\
+	 fi
