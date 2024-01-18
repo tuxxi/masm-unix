@@ -4,13 +4,8 @@ Write MASM code (and link to Irvine32) using native tools, assemble it into nati
 
 This is a fork of a fork of https://github.com/janka102/MASM_OSX that also supports Linux.
 
-I created this fork because, like the original author, I needed to use Irvine32 and MASM for a university course. The professor told me I couldn't use Linux and had to buy a Windows PC or install Windows. I proved him wrong! The original forks build was broken on my computer and I'm sure a lot of other peoples too. This fork uses nasm instead of yasm.
-
 Made possible thanks to [JWasm](https://github.com/JWasm/JWasm). Irvine32 library via [Along32](https://github.com/janka102/Along32).
 OSX support thanks to [objconv](https://github.com/gitGNU/objconv)
-
-I am wholly unaware if OSX is actually supported but in theory it should. You might have to do some tinkering to get it to actually build. Apple silicon M series macs are probably not going to work because of the underlying architecture changes. I'm not too sure.
-
 
 # Background
 If you're like me, you had to take a x86 assembly class in college that uses Kip Irvine's book [Assembly Language for x86 Processors, 7th edition](http://kipirvine.com/asm/). The book uses MASM (Microsoft Macro Assembler) which is irrevocably tied to the Visual Studio toolchain on Windows. 
